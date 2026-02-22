@@ -8,13 +8,13 @@ const mainPage = () => {
   return (
     <>
       <UpperNav />
-      <div className='flex'>
-        <div className='w-2/12 border'>
+      <div className='flex  h-screen'>
+        <div className='w-2.5/12  border-r-2'>
           <Navbar />
         </div>
         <div>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </div>
       </div>
