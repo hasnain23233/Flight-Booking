@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-    
+     <h1>This is a frontend CRM work</h1>
     </>
   )
 }
