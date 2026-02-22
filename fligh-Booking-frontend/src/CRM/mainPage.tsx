@@ -6,19 +6,19 @@ import UpperNav from '../components/UpperNav';
 
 const mainPage = () => {
   return (
-    <>
+    <div className=''>
       <UpperNav />
-      <div className='flex'>
-        <div className='w-2/12 border'>
+      <div className='flex   h-screen overflow-auto bg-gray-100'>
+        <div className='w-[300px]  border-r-2'>
           <Navbar />
         </div>
-        <div>
+        <div className='px-5 pr-3  overflow-auto w-10/12 p-2'>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
