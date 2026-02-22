@@ -5,7 +5,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   return (
-    <div className='p-3'>
+    <div className='p-3 bg-white h-full'>
       <ul className='space-y-3 font-semibold'>
         <li className='bg-[#00B4ED] text-white flex items-center gap-3 p-3 rounded-lg'>
           <p>
