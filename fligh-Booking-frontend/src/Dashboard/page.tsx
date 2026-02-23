@@ -1,11 +1,14 @@
-import React from 'react'
 import CircularGraph from '../components/graph/bookingGraph'
 import RevenueGraph from '../components/graph/RevenueGraph'
+import Attendence from './attendence'
+import BookingsTable from '../components/tables/BookingsTable'
+import RevenuTable from '../components/tables/RevenuTable'
+import LeavesTable from '../components/tables/LeavesTable'
 
 
 const page = () => {
   return (
-    <div className='w-full'>
+    <div className='w-full font-sans'>
       <div className='flex items-center justify-between mt-4'>
         <div>
           <h1 className='font-semibold text-3xl text-gray-800'>Hello, Amjad</h1>
@@ -161,7 +164,7 @@ const page = () => {
         </div>
       </div>
 
-      <div>
+      <div className='flex gap-2'>
         <div className='w-7/12 flex gap-4'>
           <div className="flex flex-col w-6/12 p-4 justify-center items-center rounded-md bg-white">
             <h1 className='leading-loose font-semibold'>Bookings Target Achieved</h1>
@@ -173,11 +176,26 @@ const page = () => {
           <div className="flex flex-col w-6/12 p-4 justify-center items-center rounded-md bg-white">
             <h1 className='leading-loose font-semibold'>Bookings Target Achieved</h1>
             <div className='mt-3'>
-
               <RevenueGraph value={500} max={1000} />
             </div>
           </div>
         </div>
+        <div className='w-5/12 rounded-md overflow-hidden bg-white'>
+          <Attendence/>
+        </div>
+      </div>
+
+      <div className='flex items-center justify-between gap-3'>
+        <div className='w-6/12 mt-6'>
+            <BookingsTable/>
+        </div>
+        <div className='w-6/12 mt-6'>
+            <RevenuTable/>
+        </div>
+      </div>
+
+      <div className='mt-6'>
+        <LeavesTable/>
       </div>
     </div>
   )
