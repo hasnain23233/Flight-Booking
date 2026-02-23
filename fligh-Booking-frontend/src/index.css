@@ -6,3 +6,28 @@
 body {
   @apply font-sans;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;               /* Width of the vertical scrollbar */
+  height: 8px;              /* Height of the horizontal scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;      /* Track color */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;         /* Thumb color */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;         /* Thumb color on hover */
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;                    /* "auto", "thin", or "none" */
+  scrollbar-color: #888 #f1f1f1;             /* thumb color, track color */
+}
