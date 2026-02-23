@@ -1,5 +1,3 @@
-import React from "react";
-
 const RevenueGraph = ({ value = 2, max = 1000 }) => {
   const radius = 45;
   const circumference = 2 * Math.PI * radius;

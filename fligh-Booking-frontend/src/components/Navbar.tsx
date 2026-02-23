@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { NavLink, useMatch } from 'react-router'; // import useMatch
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -17,8 +18,8 @@ const NavItem : React.FC<NavItemProps>  = ({ to, children, end = false, showChev
     <li
       className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-200 cursor-pointer ${
         isActive
-          ? 'bg-[#00B4ED] text-white' // active styles
-          : 'text-gray-500 hover:bg-[#00B4ED] hover:text-white' // inactive + hover
+          ? 'bg-[#00B4ED] text-white' 
+          : 'text-gray-500 hover:bg-[#00B4ED] hover:text-white' 
       }`}
     >
       {children}
@@ -28,10 +29,22 @@ const NavItem : React.FC<NavItemProps>  = ({ to, children, end = false, showChev
 };
 
 const Navbar = () => {
+  const [isBookingsOpen, setIsBookingsOpen] = useState(false);
+
+  const bookingSubItems = [
+    { name: 'New Booking', path: '/booking-panel/new-booking' },
+    { name: 'Booking Approvals', path: '/booking-panel/approvals' },
+    { name: 'Pending Bookings', path: '/booking-panel/pending' },
+    { name: 'Issued Uncleared', path: '/booking-panel/issued-uncleared' },
+    { name: 'Issued Cleared', path: '/booking-panel/issued-cleared' },
+    { name: 'Cancelled Bookings', path: '/booking-panel/cancelled' },
+    { name: 'Search Booking', path: '/booking-panel/search' },
+  ];
+
+
   return (
     <div className='p-3 bg-white h-full'>
       <ul className='space-y-3 font-semibold'>
-        {/* Dashboard */}
         <NavItem to="/dashboard" end>
           <p>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,9 +63,11 @@ const Navbar = () => {
             Dashboard
           </NavLink>
         </NavItem>
-
-        {/* Bookings Panel */}
-        <NavItem to="/booking-panel" showChevron>
+        <li className="relative">
+          <div
+            className="flex items-center gap-3 p-3 rounded-lg text-gray-500 hover:bg-[#00B4ED] hover:text-white transition-colors duration-200 cursor-pointer"
+            onClick={() => setIsBookingsOpen(!isBookingsOpen)}
+          >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="w-5 h-5 shrink-0">
             <g clipPath="url(#clip0_34_13)">
               <path d="M16.25 3.125H3.75C2.71447 3.125 1.875 3.96447 1.875 5V16.25C1.875 17.2855 2.71447 18.125 3.75 18.125H16.25C17.2855 18.125 18.125 17.2855 18.125 16.25V5C18.125 3.96447 17.2855 3.125 16.25 3.125Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
@@ -73,11 +88,37 @@ const Navbar = () => {
                 <rect width="20" height="20" fill="white" />
               </clipPath>
             </defs>
-          </svg>
-          <NavLink to="/booking-panel" end className="flex-1">
-            Bookings Panel
-          </NavLink>
-        </NavItem>
+          </svg><span className="flex-1">Bookings Panel</span>
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className={`ml-auto transition-transform duration-200 ${
+                isBookingsOpen ? 'rotate-90' : ''
+              }`}
+            />
+          </div>
+
+          {/* Dropdown sub-menu */}
+          {isBookingsOpen && (
+            <ul className="mt-1 ml-8 space-y-1 border-l-2 border-gray-200 pl-2">
+              {bookingSubItems.map((item) => (
+                <li key={item.path}>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `block p-2 rounded-lg font-light transition-colors duration-200 ${
+                        isActive
+                          ? 'bg-[#00B4ED] text-white'
+                          : 'text-gray-500 hover:bg-[#00B4ED] hover:text-white'
+                      }`
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
 
         {/* Customer Inquiries */}
         <NavItem to="/customer-inquiries" showChevron> {/* adjust route as needed */}

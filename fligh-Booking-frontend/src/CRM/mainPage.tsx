@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router";
 import Dashboard from '../Dashboard/page';
 import Navbar from '../components/Navbar'
 import UpperNav from '../components/UpperNav';
+import NewBooking from "../BookingPannel/newBooking";
 
 const mainPage = () => {
   return (
@@ -14,6 +15,7 @@ const mainPage = () => {
         <div className='px-5 pr-3 h-full overflow-auto w-10/12 p-2'>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/booking-panel/new-booking" element={<NewBooking />} />
           </Routes>
         </div>
       </div>
