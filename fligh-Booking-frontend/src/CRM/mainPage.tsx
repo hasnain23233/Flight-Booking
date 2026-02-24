@@ -3,6 +3,8 @@ import Dashboard from '../Dashboard/page';
 import Navbar from '../components/Navbar'
 import UpperNav from '../components/UpperNav';
 import NewBooking from "../BookingPannel/newBooking";
+import Approvals from "../BookingPannel/approvals";
+import PaddingBooking from "../BookingPannel/paddingBooking";
 
 const mainPage = () => {
   return (
@@ -16,6 +18,8 @@ const mainPage = () => {
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/booking-panel/new-booking" element={<NewBooking />} />
+            <Route path="/booking-panel/approvals" element={<Approvals />} />
+            <Route path="/booking-panel/pending" element={<PaddingBooking />} />
           </Routes>
         </div>
       </div>
