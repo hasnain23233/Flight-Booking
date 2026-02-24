@@ -8,7 +8,7 @@ import LeavesTable from '../components/tables/LeavesTable'
 
 const page = () => {
   return (
-    <div className='w-full font-sans'>
+    <div className='font-sans'>
       <div className='flex items-center justify-between mt-4'>
         <div>
           <h1 className='font-semibold text-3xl text-gray-800'>Hello, Amjad</h1>
