@@ -5,133 +5,81 @@ interface Booking {
     file: number;
     bookingDate: string;
     travelingDate: string;
-    refNo: number;
-    paymentDate: string;
-    source: number;
+    returnDate: string; // ✅ fixed type
+    sopRef: string;
     customerName: string;
-    card: number;
-    bank: number;
-    cash: number;
-    cheque: number;
-    dateAmount: number;
     agent: string;
-    brand: string;
 }
 
 const mockData: Booking[] = Array.from({ length: 55 }, (_, i) => ({
     id: i + 1,
-    file: 0,
-    bookingDate: "01/01/2026",
-    travelingDate: "01/01/2026",
-    refNo: 12432343 + i,
-    paymentDate: "01/01/2026",
-    source: 45332,
+    file: 1000 + i,
+    bookingDate: "01/01/2026",  
+    travelingDate: "05/01/2026",
+    returnDate: "10/01/2026",
+    sopRef: "SOP-" + (5000 + i),
     customerName: "john",
-    card: 0,
-    bank: 0,
-    cash: 0,
-    cheque: 0,
-    dateAmount: 0,
     agent: i % 2 === 0 ? "amjad" : "ali",
-    brand: i % 2 === 0 ? "Sky" : "TravelCo",
 }));
 
-const paddingBooking: React.FC = () => {
-    const [searchInput, setSearchInput] = useState("");
-    const [search, setSearch] = useState("");
+const Issued: React.FC = () => {
 
-    const [tempBrand, setTempBrand] = useState("");
     const [tempAgent, setTempAgent] = useState("");
     const [tempSort, setTempSort] = useState("");
 
-    const [brandFilter, setBrandFilter] = useState("");
     const [agentFilter, setAgentFilter] = useState("");
     const [sortBy, setSortBy] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(50);
 
+    // ✅ Filtering + Sorting
     const filteredData = useMemo(() => {
         let data = [...mockData];
 
-        if (search) {
-            data = data.filter((b) =>
-                b.customerName.toLowerCase().includes(search.toLowerCase())
-            );
-        }
-
-        if (brandFilter) {
-            data = data.filter((b) => b.brand === brandFilter);
-        }
-
+        // Agent Filter
         if (agentFilter) {
             data = data.filter((b) => b.agent === agentFilter);
         }
 
+        // Sorting
         if (sortBy === "ref") {
-            data.sort((a, b) => a.refNo - b.refNo);
+            data.sort((a, b) => a.id - b.id);
         }
 
         return data;
-    }, [search, brandFilter, agentFilter, sortBy]);
+    }, [agentFilter, sortBy]);
 
-    const handleSearch = () => {
-        setSearch(searchInput);
-        setCurrentPage(1);
-    };
-
+    // ✅ Apply Button Logic
     const handleApplyFilters = () => {
-        setBrandFilter(tempBrand);
         setAgentFilter(tempAgent);
         setSortBy(tempSort);
         setCurrentPage(1);
     };
 
     const totalPages = Math.ceil(filteredData.length / perPage);
+
     const paginatedData = filteredData.slice(
         (currentPage - 1) * perPage,
         currentPage * perPage
     );
 
-
     return (
         <div className="p-6 bg-gray-100 font-san min-h-screen">
             <div className=" my-4">
-                <h1 className='font-semibold text-3xl text-gray-800'>Booking Approvals (Pending)  </h1> 
+                <h1 className='font-semibold text-3xl text-gray-800'>
+                    Issued Uncleared
+                </h1>
             </div>
+
+            {/* Filters */}
             <div className=" flex flex-col justify-end items-end mb-6">
-                <div className="space-x-5 w-full flex justify-between items-end">
-
-                    <div className="w-3/12 flex gap-3">
-                        <input
-                            type="text"
-                            placeholder="Search Customer"
-                            className="border px-4 py-3 outline-none rounded w-full"
-                            value={searchInput}
-                            onChange={(e) => setSearchInput(e.target.value)}
-                        />
-                        <button
-                            onClick={handleSearch}
-                            className="px-4 bg-[#00B4ED] rounded-md text-white"
-                        >
-                            Search
-                        </button>
-                    </div>
+                <div className="space-x-5 w-full flex justify-end items-end">
 
                     <div className="w-3/12">
-                        <p className="text-lg text-gray-700">Brands <span className="text-red-800 text-xl">*</span></p>
-                        <select
-                            className="border-2 rounded-lg w-full px-4 outline-none py-3"
-                            onChange={(e) => setTempBrand(e.target.value)}
-                        >
-                            <option value="">--Select Brand--</option>
-                            <option value="Sky">Sky</option>
-                            <option value="TravelCo">TravelCo</option>
-                        </select>
-                    </div>
-
-                    <div className="w-3/12">
-                        <p className="text-lg text-gray-700">Sort By <span className="text-red-800 text-xl">*</span></p>
+                        <p className="text-lg text-gray-700">
+                            Sort By <span className="text-red-800 text-xl">*</span>
+                        </p>
                         <select
                             className="border-2 rounded-lg w-full px-4 outline-none py-3"
                             onChange={(e) => setTempSort(e.target.value)}
@@ -142,7 +90,9 @@ const paddingBooking: React.FC = () => {
                     </div>
 
                     <div className="w-3/12">
-                        <p className="text-lg text-gray-700">Agents <span className="text-red-800 text-xl">*</span></p>
+                        <p className="text-lg text-gray-700">
+                            Agents <span className="text-red-800 text-xl">*</span>
+                        </p>
                         <select
                             className="border-2 rounded-lg w-full px-4 outline-none py-3"
                             onChange={(e) => setTempAgent(e.target.value)}
@@ -162,27 +112,19 @@ const paddingBooking: React.FC = () => {
                 </button>
             </div>
 
-
-
+            {/* Table */}
             <div className="bg-white rounded-xl shadow overflow-hidden">
-
                 <div className="max-h-[500px] overflow-y-auto">
                     <table className="w-full text-sm text-left">
                         <thead className="bg-[#00B4ED] text-white sticky top-0">
                             <tr>
-                                <th className="px-4 py-3">REF #</th>
-                                <th className="px-4 py-3">FILE</th>
+                                <th className="px-4 py-3">Sr #</th>
+                                <th className="px-4 py-3">File No</th>
                                 <th className="px-4 py-3">BOOKING DATE</th>
                                 <th className="px-4 py-3">TRAVELING DATE</th>
-                                <th className="px-4 py-3">REF NO#</th>
-                                <th className="px-4 py-3">PAYMENT DATE</th>
-                                <th className="px-4 py-3">SOURCE</th>
-                                <th className="px-4 py-3">CUSTOMER NAME</th>
-                                <th className="px-4 py-3">CARD</th>
-                                <th className="px-4 py-3">BANK</th>
-                                <th className="px-4 py-3">CASH</th>
-                                <th className="px-4 py-3">CHEQUE</th>
-                                <th className="px-4 py-3">DATE AMOUNT</th>
+                                <th className="px-4 py-3">Return Date</th>
+                                <th className="px-4 py-3">Sop.Ref#</th>
+                                <th className="px-4 py-3">Customer Name</th>
                                 <th className="px-4 py-3">AGENT</th>
                             </tr>
                         </thead>
@@ -190,7 +132,7 @@ const paddingBooking: React.FC = () => {
                         <tbody>
                             {paginatedData.length === 0 ? (
                                 <tr>
-                                    <td colSpan={14} className="text-center py-10 text-gray-500">
+                                    <td colSpan={8} className="text-center py-10 text-gray-500">
                                         No pending bookings found
                                     </td>
                                 </tr>
@@ -201,15 +143,9 @@ const paddingBooking: React.FC = () => {
                                         <td className="px-4 py-3">{b.file}</td>
                                         <td className="px-4 py-3">{b.bookingDate}</td>
                                         <td className="px-4 py-3">{b.travelingDate}</td>
-                                        <td className="px-4 py-3">{b.refNo}</td>
-                                        <td className="px-4 py-3">{b.paymentDate}</td>
-                                        <td className="px-4 py-3">{b.source}</td>
+                                        <td className="px-4 py-3">{b.returnDate}</td>
+                                        <td className="px-4 py-3">{b.sopRef}</td>
                                         <td className="px-4 py-3">{b.customerName}</td>
-                                        <td className="px-4 py-3">{b.card}</td>
-                                        <td className="px-4 py-3">{b.bank}</td>
-                                        <td className="px-4 py-3">{b.cash}</td>
-                                        <td className="px-4 py-3">{b.cheque}</td>
-                                        <td className="px-4 py-3">{b.dateAmount}</td>
                                         <td className="px-4 py-3">{b.agent}</td>
                                     </tr>
                                 ))
@@ -225,7 +161,10 @@ const paddingBooking: React.FC = () => {
                         <select
                             className="ml-2 border px-2 py-1 rounded"
                             value={perPage}
-                            onChange={(e) => setPerPage(Number(e.target.value))}
+                            onChange={(e) => {
+                                setPerPage(Number(e.target.value));
+                                setCurrentPage(1);
+                            }}
                         >
                             <option value={10}>10</option>
                             <option value={25}>25</option>
@@ -255,10 +194,9 @@ const paddingBooking: React.FC = () => {
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
     );
 };
 
-export default paddingBooking;
+export default Issued;

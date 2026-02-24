@@ -5,6 +5,9 @@ import UpperNav from '../components/UpperNav';
 import NewBooking from "../BookingPannel/newBooking";
 import Approvals from "../BookingPannel/approvals";
 import PaddingBooking from "../BookingPannel/paddingBooking";
+import Issued from '../BookingPannel/Issued'
+import ClearIssued from "../BookingPannel/clearIssued";
+import Cancel from '../BookingPannel/cancelled'
 
 const mainPage = () => {
   return (
@@ -20,6 +23,9 @@ const mainPage = () => {
             <Route path="/booking-panel/new-booking" element={<NewBooking />} />
             <Route path="/booking-panel/approvals" element={<Approvals />} />
             <Route path="/booking-panel/pending" element={<PaddingBooking />} />
+            <Route path="/booking-panel/issued-uncleared" element={<Issued />} />
+            <Route path="/booking-panel/issued-cleared" element={<ClearIssued />} />
+            <Route path="/booking-panel/cancelled" element={<Cancel />} />
           </Routes>
         </div>
       </div>
