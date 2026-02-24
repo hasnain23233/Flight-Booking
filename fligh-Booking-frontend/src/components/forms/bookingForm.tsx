@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCalendarAlt,
     faClock,
-    faCreditCard,
-    faUser,
-    faPlane,
 } from '@fortawesome/free-solid-svg-icons';
 
 const BookingForm = () => {
