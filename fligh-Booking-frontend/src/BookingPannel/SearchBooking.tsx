@@ -46,6 +46,7 @@ const SearchBooking: React.FC = () => {
     const handleCheckboxChange = (id: string) => {
         setSelectedOptions((prev) => ({ ...prev, [id]: !prev[id] }));
     };
+    const table = ["Sr#", "File No", "Booking Date", "Travelling Date", "Ref#", "Customer Name", "AGENT"]
 
     const handleSearch = () => {
         console.log("Search triggered with:", {
@@ -61,7 +62,7 @@ const SearchBooking: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-gray-100 p-6 font-sans">
-            <div className="mx-auto max-w-7xl">
+            <div className="mx-auto w-full">
                 <h1 className="mb-6 text-3xl font-bold text-gray-800">Search Booking</h1>
 
                 {/* Form Card */}
@@ -123,7 +124,7 @@ const SearchBooking: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="mt-8">
+                    <div className="mt-8 m-auto text-center">
                         <button
                             onClick={handleSearch}
                             className="bg-sky-500 text-white px-6 py-2 rounded-md hover:bg-sky-600 transition focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -140,7 +141,7 @@ const SearchBooking: React.FC = () => {
                         <table className="min-w-full border-collapse border border-gray-200 text-sm">
                             <thead className="bg-[#00B4ED] p-5 h-16 text-white">
                                 <tr>
-                                    {["Sr#", "File No", "Booking Date", "Travelling Date", "Ref#", "Customer Name", "AGENT"].map(
+                                    {table.map(
                                         (head) => (
                                             <th key={head} className="py-2 px-4 border border-gray-200 text-left">
                                                 {head}

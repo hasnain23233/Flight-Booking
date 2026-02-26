@@ -10,17 +10,16 @@ interface NavItemProps {
   showChevron?: boolean;
 }
 
-const NavItem : React.FC<NavItemProps>  = ({ to, children, end = false, showChevron = false }) => {
+const NavItem: React.FC<NavItemProps> = ({ to, children, end = false, showChevron = false }) => {
   const match = useMatch({ path: to, end }); // check if current route matches
   const isActive = !!match;
 
   return (
     <li
-      className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-200 cursor-pointer ${
-        isActive
-          ? 'bg-[#00B4ED] text-white' 
-          : 'text-gray-500 hover:bg-[#00B4ED] hover:text-white' 
-      }`}
+      className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-200 cursor-pointer ${isActive
+        ? 'bg-[#00B4ED] text-white'
+        : 'text-gray-500 hover:bg-[#00B4ED] hover:text-white'
+        }`}
     >
       {children}
       {showChevron && <FontAwesomeIcon icon={faChevronRight} className="ml-auto" />}
@@ -30,6 +29,8 @@ const NavItem : React.FC<NavItemProps>  = ({ to, children, end = false, showChev
 
 const Navbar = () => {
   const [isBookingsOpen, setIsBookingsOpen] = useState(false);
+  const [isCustomerInquiriesOpen, setIsCustomerInquiriesOpen] = useState(false);
+  
 
   const bookingSubItems = [
     { name: 'New Booking', path: '/booking-panel/new-booking' },
@@ -39,6 +40,15 @@ const Navbar = () => {
     { name: 'Issued Cleared', path: '/booking-panel/issued-cleared' },
     { name: 'Cancelled Bookings', path: '/booking-panel/cancelled' },
     { name: 'Search Booking', path: '/booking-panel/search' },
+  ];
+  const customerInquirySubItems = [
+    { name: 'Flight Inquiries', path: '/booking-panel/flight-inquiries' },
+    { name: 'Inquiry Follow up', path: '/booking-panel/inquiry-follow-up' },
+    { name: 'Day Wise Summary', path: '/booking-panel/day-wise-summary' },
+    { name: 'Inquiry Summary', path: '/booking-panel/inquiry-summary' },
+    { name: 'Create Follow-Up ', path: '/booking-panel/freate-follow-up ' },
+    { name: 'Email Backup', path: '/booking-panel/email-backup' },
+    { name: 'Sale Conversion', path: '/booking-panel/sale-conversion' },
   ];
 
 
@@ -68,32 +78,31 @@ const Navbar = () => {
             className="flex items-center gap-3 p-3 rounded-lg text-gray-500 hover:bg-[#00B4ED] hover:text-white transition-colors duration-200 cursor-pointer"
             onClick={() => setIsBookingsOpen(!isBookingsOpen)}
           >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="w-5 h-5 shrink-0">
-            <g clipPath="url(#clip0_34_13)">
-              <path d="M16.25 3.125H3.75C2.71447 3.125 1.875 3.96447 1.875 5V16.25C1.875 17.2855 2.71447 18.125 3.75 18.125H16.25C17.2855 18.125 18.125 17.2855 18.125 16.25V5C18.125 3.96447 17.2855 3.125 16.25 3.125Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
-              <path d="M11.5625 10C12.0803 10 12.5 9.58027 12.5 9.0625C12.5 8.54473 12.0803 8.125 11.5625 8.125C11.0447 8.125 10.625 8.54473 10.625 9.0625C10.625 9.58027 11.0447 10 11.5625 10Z" fill="currentColor" />
-              <path d="M14.6875 10C15.2053 10 15.625 9.58027 15.625 9.0625C15.625 8.54473 15.2053 8.125 14.6875 8.125C14.1697 8.125 13.75 8.54473 13.75 9.0625C13.75 9.58027 14.1697 10 14.6875 10Z" fill="currentColor" />
-              <path d="M11.5625 13.125C12.0803 13.125 12.5 12.7053 12.5 12.1875C12.5 11.6697 12.0803 11.25 11.5625 11.25C11.0447 11.25 10.625 11.6697 10.625 12.1875C10.625 12.7053 11.0447 13.125 11.5625 13.125Z" fill="currentColor" />
-              <path d="M14.6875 13.125C15.2053 13.125 15.625 12.7053 15.625 12.1875C15.625 11.6697 15.2053 11.25 14.6875 11.25C14.1697 11.25 13.75 11.6697 13.75 12.1875C13.75 12.7053 14.1697 13.125 14.6875 13.125Z" fill="currentColor" />
-              <path d="M5.3125 13.125C5.83027 13.125 6.25 12.7053 6.25 12.1875C6.25 11.6697 5.83027 11.25 5.3125 11.25C4.79473 11.25 4.375 11.6697 4.375 12.1875C4.375 12.7053 4.79473 13.125 5.3125 13.125Z" fill="currentColor" />
-              <path d="M8.4375 13.125C8.95527 13.125 9.375 12.7053 9.375 12.1875C9.375 11.6697 8.95527 11.25 8.4375 11.25C7.91973 11.25 7.5 11.6697 7.5 12.1875C7.5 12.7053 7.91973 13.125 8.4375 13.125Z" fill="currentColor" />
-              <path d="M5.3125 16.25C5.83027 16.25 6.25 15.8303 6.25 15.3125C6.25 14.7947 5.83027 14.375 5.3125 14.375C4.79473 14.375 4.375 14.7947 4.375 15.3125C4.375 15.8303 4.79473 16.25 5.3125 16.25Z" fill="currentColor" />
-              <path d="M8.4375 16.25C8.95527 16.25 9.375 15.8303 9.375 15.3125C9.375 14.7947 8.95527 14.375 8.4375 14.375C7.91973 14.375 7.5 14.7947 7.5 15.3125C7.5 15.8303 7.91973 16.25 8.4375 16.25Z" fill="currentColor" />
-              <path d="M11.5625 16.25C12.0803 16.25 12.5 15.8303 12.5 15.3125C12.5 14.7947 12.0803 14.375 11.5625 14.375C11.0447 14.375 10.625 14.7947 10.625 15.3125C10.625 15.8303 11.0447 16.25 11.5625 16.25Z" fill="currentColor" />
-              <path d="M5 1.875V3.125M15 1.875V3.125" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M18.125 6.25H1.875" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
-            </g>
-            <defs>
-              <clipPath id="clip0_34_13">
-                <rect width="20" height="20" fill="white" />
-              </clipPath>
-            </defs>
-          </svg><span className="flex-1">Bookings Panel</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="w-5 h-5 shrink-0">
+              <g clipPath="url(#clip0_34_13)">
+                <path d="M16.25 3.125H3.75C2.71447 3.125 1.875 3.96447 1.875 5V16.25C1.875 17.2855 2.71447 18.125 3.75 18.125H16.25C17.2855 18.125 18.125 17.2855 18.125 16.25V5C18.125 3.96447 17.2855 3.125 16.25 3.125Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
+                <path d="M11.5625 10C12.0803 10 12.5 9.58027 12.5 9.0625C12.5 8.54473 12.0803 8.125 11.5625 8.125C11.0447 8.125 10.625 8.54473 10.625 9.0625C10.625 9.58027 11.0447 10 11.5625 10Z" fill="currentColor" />
+                <path d="M14.6875 10C15.2053 10 15.625 9.58027 15.625 9.0625C15.625 8.54473 15.2053 8.125 14.6875 8.125C14.1697 8.125 13.75 8.54473 13.75 9.0625C13.75 9.58027 14.1697 10 14.6875 10Z" fill="currentColor" />
+                <path d="M11.5625 13.125C12.0803 13.125 12.5 12.7053 12.5 12.1875C12.5 11.6697 12.0803 11.25 11.5625 11.25C11.0447 11.25 10.625 11.6697 10.625 12.1875C10.625 12.7053 11.0447 13.125 11.5625 13.125Z" fill="currentColor" />
+                <path d="M14.6875 13.125C15.2053 13.125 15.625 12.7053 15.625 12.1875C15.625 11.6697 15.2053 11.25 14.6875 11.25C14.1697 11.25 13.75 11.6697 13.75 12.1875C13.75 12.7053 14.1697 13.125 14.6875 13.125Z" fill="currentColor" />
+                <path d="M5.3125 13.125C5.83027 13.125 6.25 12.7053 6.25 12.1875C6.25 11.6697 5.83027 11.25 5.3125 11.25C4.79473 11.25 4.375 11.6697 4.375 12.1875C4.375 12.7053 4.79473 13.125 5.3125 13.125Z" fill="currentColor" />
+                <path d="M8.4375 13.125C8.95527 13.125 9.375 12.7053 9.375 12.1875C9.375 11.6697 8.95527 11.25 8.4375 11.25C7.91973 11.25 7.5 11.6697 7.5 12.1875C7.5 12.7053 7.91973 13.125 8.4375 13.125Z" fill="currentColor" />
+                <path d="M5.3125 16.25C5.83027 16.25 6.25 15.8303 6.25 15.3125C6.25 14.7947 5.83027 14.375 5.3125 14.375C4.79473 14.375 4.375 14.7947 4.375 15.3125C4.375 15.8303 4.79473 16.25 5.3125 16.25Z" fill="currentColor" />
+                <path d="M8.4375 16.25C8.95527 16.25 9.375 15.8303 9.375 15.3125C9.375 14.7947 8.95527 14.375 8.4375 14.375C7.91973 14.375 7.5 14.7947 7.5 15.3125C7.5 15.8303 7.91973 16.25 8.4375 16.25Z" fill="currentColor" />
+                <path d="M11.5625 16.25C12.0803 16.25 12.5 15.8303 12.5 15.3125C12.5 14.7947 12.0803 14.375 11.5625 14.375C11.0447 14.375 10.625 14.7947 10.625 15.3125C10.625 15.8303 11.0447 16.25 11.5625 16.25Z" fill="currentColor" />
+                <path d="M5 1.875V3.125M15 1.875V3.125" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M18.125 6.25H1.875" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
+              </g>
+              <defs>
+                <clipPath id="clip0_34_13">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg><span className="flex-1">Bookings Panel</span>
             <FontAwesomeIcon
               icon={faChevronRight}
-              className={`ml-auto transition-transform duration-200 ${
-                isBookingsOpen ? 'rotate-90' : ''
-              }`}
+              className={`ml-auto transition-transform duration-200 ${isBookingsOpen ? 'rotate-90' : ''
+                }`}
             />
           </div>
 
@@ -105,10 +114,9 @@ const Navbar = () => {
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
-                      `block p-2 rounded-lg font-light transition-colors duration-200 ${
-                        isActive
-                          ? 'bg-[#00B4ED] text-white'
-                          : 'text-gray-500 hover:bg-[#00B4ED] hover:text-white'
+                      `block p-2 rounded-lg font-light transition-colors duration-200 ${isActive
+                        ? 'bg-[#00B4ED] text-white'
+                        : 'text-gray-500 hover:bg-[#00B4ED] hover:text-white'
                       }`
                     }
                   >
@@ -121,24 +129,79 @@ const Navbar = () => {
         </li>
 
         {/* Customer Inquiries */}
-        <NavItem to="/customer-inquiries" showChevron> {/* adjust route as needed */}
-          <svg width="25" height="25" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_34_37)">
-              <path d="M15.7031 6.5625C15.5887 8.15117 14.4102 9.375 13.125 9.375C11.8398 9.375 10.6594 8.15156 10.5469 6.5625C10.4297 4.90977 11.5769 3.75 13.125 3.75C14.673 3.75 15.8203 4.93984 15.7031 6.5625Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M13.125 11.875C10.5793 11.875 8.13128 13.1395 7.518 15.602C7.43675 15.9277 7.64104 16.25 7.97581 16.25H18.2746C18.6094 16.25 18.8125 15.9277 18.7324 15.602C18.1192 13.1 15.6711 11.875 13.125 11.875Z" stroke="currentColor" strokeWidth="1.25" strokeMiterlimit="10" />
-              <path d="M7.81251 7.26328C7.7211 8.53203 6.76876 9.53125 5.74219 9.53125C4.71563 9.53125 3.76173 8.53242 3.67188 7.26328C3.57852 5.94336 4.50548 5 5.74219 5C6.97891 5 7.90587 5.96758 7.81251 7.26328Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M8.04689 11.9531C7.34181 11.6301 6.56525 11.5059 5.7422 11.5059C3.71095 11.5059 1.75392 12.5156 1.26369 14.4824C1.19923 14.7426 1.36252 15 1.6297 15H6.01564" stroke="currentColor" strokeWidth="1.25" strokeMiterlimit="10" strokeLinecap="round" />
-            </g>
-            <defs>
-              <clipPath id="clip0_34_37">
-                <rect width="20" height="20" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
-          <NavLink to="/customer-inquiries" end className="flex-1">
-            Customer Inquiries
-          </NavLink>
-        </NavItem>
+        <li className="relative">
+          <div
+            className="flex items-center gap-3 p-3 rounded-lg text-gray-500 hover:bg-[#00B4ED] hover:text-white transition-colors duration-200 cursor-pointer"
+            onClick={() => setIsCustomerInquiriesOpen(!isCustomerInquiriesOpen)}
+          >
+            {/* Customer icon */}
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <g clipPath="url(#clip0_34_37)">
+                <path
+                  d="M15.7031 6.5625C15.5887 8.15117 14.4102 9.375 13.125 9.375C11.8398 9.375 10.6594 8.15156 10.5469 6.5625C10.4297 4.90977 11.5769 3.75 13.125 3.75C14.673 3.75 15.8203 4.93984 15.7031 6.5625Z"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M13.125 11.875C10.5793 11.875 8.13128 13.1395 7.518 15.602C7.43675 15.9277 7.64104 16.25 7.97581 16.25H18.2746C18.6094 16.25 18.8125 15.9277 18.7324 15.602C18.1192 13.1 15.6711 11.875 13.125 11.875Z"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeMiterlimit="10"
+                />
+                <path
+                  d="M7.81251 7.26328C7.7211 8.53203 6.76876 9.53125 5.74219 9.53125C4.71563 9.53125 3.76173 8.53242 3.67188 7.26328C3.57852 5.94336 4.50548 5 5.74219 5C6.97891 5 7.90587 5.96758 7.81251 7.26328Z"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M8.04689 11.9531C7.34181 11.6301 6.56525 11.5059 5.7422 11.5059C3.71095 11.5059 1.75392 12.5156 1.26369 14.4824C1.19923 14.7426 1.36252 15 1.6297 15H6.01564"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeMiterlimit="10"
+                  strokeLinecap="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_34_37">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+
+            <span className="flex-1">Customer Inquiries</span>
+
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className={`ml-auto transition-transform duration-200 ${isCustomerInquiriesOpen ? "rotate-90" : ""
+                }`}
+            />
+          </div>
+
+          {/* Dropdown sub-menu */}
+          {isCustomerInquiriesOpen && (
+            <ul className="mt-1 ml-8 space-y-1 border-l-2 border-gray-200 pl-2">
+              {customerInquirySubItems.map((item) => (
+                <li key={item.path}>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `block p-2 rounded-lg font-light transition-colors duration-200 ${isActive
+                        ? "bg-[#00B4ED] text-white"
+                        : "text-gray-500 hover:bg-[#00B4ED] hover:text-white"
+                      }`
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
 
         {/* Reporting */}
         <NavItem to="/reporting" showChevron> {/* adjust route as needed */}

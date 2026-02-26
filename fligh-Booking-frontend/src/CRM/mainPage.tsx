@@ -14,11 +14,11 @@ const mainPage = () => {
   return (
     <div className=''>
       <UpperNav />
-      <div className='flex bg-gray-100'>
+      <div className='flex  h-screen overflow-hidden pt-16 bg-gray-100'>
         <div className='w-[300px]  border-r-2'>
           <Navbar />
         </div>
-        <div className='px-5 pr-3 w-10/12 p-2'>
+        <div className='px-5 overflow-y-auto pr-3 w-11/12 p-2'>
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/booking-panel/new-booking" element={<NewBooking />} />
