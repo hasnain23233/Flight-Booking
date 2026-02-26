@@ -42,13 +42,13 @@ const Navbar = () => {
     { name: 'Search Booking', path: '/booking-panel/search' },
   ];
   const customerInquirySubItems = [
-    { name: 'Flight Inquiries', path: '/booking-panel/flight-inquiries' },
-    { name: 'Inquiry Follow up', path: '/booking-panel/inquiry-follow-up' },
-    { name: 'Day Wise Summary', path: '/booking-panel/day-wise-summary' },
-    { name: 'Inquiry Summary', path: '/booking-panel/inquiry-summary' },
-    { name: 'Create Follow-Up ', path: '/booking-panel/freate-follow-up ' },
-    { name: 'Email Backup', path: '/booking-panel/email-backup' },
-    { name: 'Sale Conversion', path: '/booking-panel/sale-conversion' },
+    { name: 'Flight Inquiries', path: '/customer-inquiries/flight-inquiries' },
+    { name: 'Inquiry Follow up', path: '/customer-inquiries/inquiry-follow-up' },
+    { name: 'Day Wise Summary', path: '/customer-inquiries/day-wise-summary' },
+    { name: 'Inquiry Summary', path: '/customer-inquiries/inquiry-summary' },
+    { name: 'Create Follow-Up ', path: '/customer-inquiries/freate-follow-up ' },
+    { name: 'Email Backup', path: '/customer-inquiries/email-backup' },
+    { name: 'Sale Conversion', path: '/customer-inquiries/sale-conversion' },
   ];
 
 

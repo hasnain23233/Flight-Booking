@@ -10,6 +10,10 @@ import ClearIssued from "../BookingPannel/clearIssued";
 import Cancel from '../BookingPannel/cancelled'
 import SearchBooking from "../BookingPannel/SearchBooking";
 
+import FlightInquire from '../Customer Inquiries/flightInquiries'
+import FollowUpInquiries from "../Customer Inquiries/FollowUpInquiries";
+
+
 const mainPage = () => {
   return (
     <div className=''>
@@ -28,6 +32,10 @@ const mainPage = () => {
             <Route path="/booking-panel/issued-cleared" element={<ClearIssued />} />
             <Route path="/booking-panel/cancelled" element={<Cancel />} />
             <Route path="/booking-panel/search" element={<SearchBooking />} />
+
+            {/* customer inquiries routes*/}
+            <Route path="/customer-inquiries/flight-inquiries" element={<FlightInquire />} />
+            <Route path="/customer-inquiries/inquiry-follow-up" element={<FollowUpInquiries />} />
           </Routes>
         </div>
       </div>
