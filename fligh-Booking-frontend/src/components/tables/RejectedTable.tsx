@@ -26,14 +26,14 @@ const BookingApprovalTable: React.FC = () => {
       <div className="rounded-2xl bg-gray-100 shadow-md overflow-hidden">
 
         {/* Title */}
-        <div className="bg-[#1496B8] text-white text-center py-4 text-lg font-semibold">
+        <div className="bg-[#00A1D3] text-white text-center py-4 text-lg font-semibold">
           Booking Approval (Pending)
         </div>
 
         {/* Scroll Wrapper */}
         <div className="max-h-[400px] overflow-y-auto">
           <table className="w-full text-sm text-left">
-            <thead className="bg-[#1CA4C8] text-white sticky top-0 z-10">
+            <thead className="bg-[#00B4ED] text-white sticky top-0 z-10">
               <tr>
                 <th className="px-6 py-3 font-medium">ID</th>
                 <th className="px-6 py-3 font-medium">Company</th>

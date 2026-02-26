@@ -8,6 +8,7 @@ import PaddingBooking from "../BookingPannel/paddingBooking";
 import Issued from '../BookingPannel/Issued'
 import ClearIssued from "../BookingPannel/clearIssued";
 import Cancel from '../BookingPannel/cancelled'
+import SearchBooking from "../BookingPannel/SearchBooking";
 
 const mainPage = () => {
   return (
@@ -26,6 +27,7 @@ const mainPage = () => {
             <Route path="/booking-panel/issued-uncleared" element={<Issued />} />
             <Route path="/booking-panel/issued-cleared" element={<ClearIssued />} />
             <Route path="/booking-panel/cancelled" element={<Cancel />} />
+            <Route path="/booking-panel/search" element={<SearchBooking />} />
           </Routes>
         </div>
       </div>
