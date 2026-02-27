@@ -12,6 +12,11 @@ import SearchBooking from "../BookingPannel/SearchBooking";
 
 import FlightInquire from '../Customer Inquiries/flightInquiries'
 import FollowUpInquiries from "../Customer Inquiries/FollowUpInquiries";
+import DailyWawisSummary from '../Customer Inquiries/dailyWaisSummary'
+import InquirySummary from "../Customer Inquiries/InquirySummary";
+import CreateFollowUp from "../Customer Inquiries/CreateFollowUp";
+import EmailBackup from "../Customer Inquiries/EmailBackup";
+import SaleConversion from "../Customer Inquiries/SaleConversion";
 
 
 const mainPage = () => {
@@ -36,6 +41,11 @@ const mainPage = () => {
             {/* customer inquiries routes*/}
             <Route path="/customer-inquiries/flight-inquiries" element={<FlightInquire />} />
             <Route path="/customer-inquiries/inquiry-follow-up" element={<FollowUpInquiries />} />
+            <Route path="/customer-inquiries/day-wise-summary" element={<DailyWawisSummary />} />
+            <Route path="/customer-inquiries/inquiry-summary" element={<InquirySummary />} /> 
+            <Route path="/customer-inquiries/create-follow-up" element={<CreateFollowUp />} />
+            <Route path="/customer-inquiries/email-backup" element={<EmailBackup />} />
+            <Route path="/customer-inquiries/sale-conversion" element={<SaleConversion />} />
           </Routes>
         </div>
       </div>
