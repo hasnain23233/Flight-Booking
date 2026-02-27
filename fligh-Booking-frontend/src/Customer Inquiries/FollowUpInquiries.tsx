@@ -51,8 +51,10 @@ const FollowUpInquiries: React.FC = () => {
   const [destination, setDestination] = useState("--Select Destination--");
   const [agent, setAgent] = useState("--Select Agent--");
   const [searchAgent, setSearchAgent] = useState("");
-
   const [filtered, setFiltered] = useState<Inquiry[]>(dummyData);
+
+  // dropdown open state
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
 
   const handleSearch = () => {
     const results = dummyData.filter(
@@ -62,6 +64,15 @@ const FollowUpInquiries: React.FC = () => {
         (searchAgent === "" || inq.agent.toLowerCase().includes(searchAgent.toLowerCase()))
     );
     setFiltered(results);
+  };
+
+  const handleStatusChange = (id: number, newStatus: string) => {
+    setFiltered((prev) =>
+      prev.map((inq) =>
+        inq.id === id ? { ...inq, status: newStatus } : inq
+      )
+    );
+    setOpenDropdown(null);
   };
 
   return (
@@ -160,7 +171,7 @@ const FollowUpInquiries: React.FC = () => {
 
         {/* Table Section */}
         <div className="bg-white  rounded-xl shadow-sm overflow-x-auto">
-          <table className="min-w-full rounded-xl overflow-hidden border-collapse border border-gray-200 text-sm">
+          <table className="min-w-full rounded-xl  border-collapse border border-gray-200 text-sm">
             <thead className="bg-[#00B4ED] h-16 text-white">
               <tr>
                 {[
@@ -181,7 +192,7 @@ const FollowUpInquiries: React.FC = () => {
             <tbody>
               {filtered.length > 0 ? (
                 filtered.map((inq, index) => (
-                  <tr key={inq.id} className="hover:bg-gray-50 h-12 border-b">
+                  <tr key={inq.id} className="hover:bg-gray-50 h-12 border-b relative">
                     <td className="py-2 px-4 border border-gray-200">{index + 1}</td>
                     <td className="py-2 px-4 border border-gray-200">{inq.date}</td>
                     <td className="py-2 px-4 border border-gray-200 text-sky-600 font-semibold cursor-pointer">
@@ -191,13 +202,50 @@ const FollowUpInquiries: React.FC = () => {
                       {inq.title}
                     </td>
                     <td className="py-2 px-4 border border-gray-200">{inq.primaryPlane}</td>
-                    <td className="py-2 px-4 border border-gray-200 ">
-                      <span
-                        className={`px-3 py-3 rounded-md h-14 text-xs font-medium w-[200px] ${statusColors[inq.status]}`}
+
+                    {/* Status Dropdown */}
+                    <td className="py-2 px-4 border  border-gray-200 relative">
+                      <div
+                        className={`px-3 py-3 rounded-md h-12 flex items-center justify-between text-xs font-bold cursor-pointer ${statusColors[inq.status]}`}
+                        onClick={() =>
+                          setOpenDropdown(openDropdown === inq.id ? null : inq.id)
+                        }
                       >
-                        {inq.status}
-                      </span>
+                        <p>{inq.status}</p>
+                        <p>
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`transition-transform ${
+                              openDropdown === inq.id ? "rotate-180" : ""
+                            }`}
+                          >
+                            <path
+                              d="M2.64648 4.85359L3.35359 4.14648L6.00004 6.79293L8.64649 4.14649L9.3536 4.85359L6.00005 8.20714L2.64648 4.85359Z"
+                              fill="#4E5137"
+                            />
+                          </svg>
+                        </p>
+                      </div>
+
+                      {openDropdown === inq.id && (
+                        <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-md">
+                          {Object.keys(statusColors).map((status) => (
+                            <div
+                              key={status}
+                              className={`px-3 py-2 text-xs font-bold cursor-pointer hover:opacity-80 ${statusColors[status]}`}
+                              onClick={() => handleStatusChange(inq.id, status)}
+                            >
+                              {status}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </td>
+
                     <td className="py-2 px-4 border border-gray-200">{inq.agent}</td>
                   </tr>
                 ))
@@ -212,7 +260,7 @@ const FollowUpInquiries: React.FC = () => {
           </table>
 
           {/* Pagination */}
-          <div className="flex justify-start items-center gap-2 mt-4 text-sm text-gray-600">
+          <div className="flex justify-start p-2 items-center gap-2 mt-4 text-sm text-gray-600">
             <span>Select Page</span>
             <select className="border rounded-md px-2 py-1">
               <option>1</option>

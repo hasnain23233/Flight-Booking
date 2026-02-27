@@ -46,7 +46,7 @@ const Navbar = () => {
     { name: 'Inquiry Follow up', path: '/customer-inquiries/inquiry-follow-up' },
     { name: 'Day Wise Summary', path: '/customer-inquiries/day-wise-summary' },
     { name: 'Inquiry Summary', path: '/customer-inquiries/inquiry-summary' },
-    { name: 'Create Follow-Up ', path: '/customer-inquiries/freate-follow-up ' },
+    { name: 'Create Follow-Up ', path: '/customer-inquiries/create-follow-up' },
     { name: 'Email Backup', path: '/customer-inquiries/email-backup' },
     { name: 'Sale Conversion', path: '/customer-inquiries/sale-conversion' },
   ];
