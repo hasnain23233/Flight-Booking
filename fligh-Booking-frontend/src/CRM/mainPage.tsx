@@ -19,6 +19,12 @@ import EmailBackup from "../Customer Inquiries/EmailBackup";
 import SaleConversion from "../Customer Inquiries/SaleConversion";
 
 
+import GeneralReports from "../Reporting/GeneralReports";
+import SalaryReports from "../Reporting/SalaryReports";
+import BadDebt from '../Reporting/BadDebt'
+import BadDebtPayments from "../Reporting/Baddebtpayments";
+
+
 const mainPage = () => {
   return (
     <div className=''>
@@ -46,6 +52,13 @@ const mainPage = () => {
             <Route path="/customer-inquiries/create-follow-up" element={<CreateFollowUp />} />
             <Route path="/customer-inquiries/email-backup" element={<EmailBackup />} />
             <Route path="/customer-inquiries/sale-conversion" element={<SaleConversion />} />
+
+
+            {/* Reporting routing */}
+            <Route path="/reporting/general-reports" element={<GeneralReports />} />
+            <Route path="/reporting/salary-report" element={<SalaryReports />} />
+            <Route path="/reporting/bad-debt" element={<BadDebt />} />
+            <Route path="/reporting/bad-debt-payments" element={<BadDebtPayments />} />
           </Routes>
         </div>
       </div>

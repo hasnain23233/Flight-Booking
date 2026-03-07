@@ -30,6 +30,7 @@ const NavItem: React.FC<NavItemProps> = ({ to, children, end = false, showChevro
 const Navbar = () => {
   const [isBookingsOpen, setIsBookingsOpen] = useState(false);
   const [isCustomerInquiriesOpen, setIsCustomerInquiriesOpen] = useState(false);
+  const [isReportingOpen, setIsReportingOpen] = useState(false);
   
 
   const bookingSubItems = [
@@ -50,6 +51,15 @@ const Navbar = () => {
     { name: 'Email Backup', path: '/customer-inquiries/email-backup' },
     { name: 'Sale Conversion', path: '/customer-inquiries/sale-conversion' },
   ];
+  const reportingSubItems = [
+  { name: "General Reports", path: "/reporting/general-reports" },
+  { name: "Salary Reports", path: "/reporting/salary-report" },
+  { name: "Bad Debt", path: "/reporting/bad-debt" },
+  { name: "Bad Debt Payments", path: "/reporting/bad-debt-payments" },
+  { name: "Attendance Sheet", path: "/reporting/attendance-sheet" },
+  { name: "Zobo Number Confirmation", path: "/reporting/zobo-number-confirmation" },
+  { name: "Mail Box", path: "/reporting/mail-box" },
+];
 
 
   return (
@@ -204,24 +214,57 @@ const Navbar = () => {
         </li>
 
         {/* Reporting */}
-        <NavItem to="/reporting" showChevron> {/* adjust route as needed */}
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_34_46)">
-              <path d="M4.0625 12.5H2.8125C2.63991 12.5 2.5 12.6399 2.5 12.8125V18.4375C2.5 18.6101 2.63991 18.75 2.8125 18.75H4.0625C4.23509 18.75 4.375 18.6101 4.375 18.4375V12.8125C4.375 12.6399 4.23509 12.5 4.0625 12.5Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M12.8125 8.75H11.5625C11.3899 8.75 11.25 8.88991 11.25 9.0625V18.4375C11.25 18.6101 11.3899 18.75 11.5625 18.75H12.8125C12.9851 18.75 13.125 18.6101 13.125 18.4375V9.0625C13.125 8.88991 12.9851 8.75 12.8125 8.75Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M17.1875 4.375H15.9375C15.7649 4.375 15.625 4.51491 15.625 4.6875V18.4375C15.625 18.6101 15.7649 18.75 15.9375 18.75H17.1875C17.3601 18.75 17.5 18.6101 17.5 18.4375V4.6875C17.5 4.51491 17.3601 4.375 17.1875 4.375Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M8.4375 1.25H7.1875C7.01491 1.25 6.875 1.38991 6.875 1.5625V18.4375C6.875 18.6101 7.01491 18.75 7.1875 18.75H8.4375C8.61009 18.75 8.75 18.6101 8.75 18.4375V1.5625C8.75 1.38991 8.61009 1.25 8.4375 1.25Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-            </g>
-            <defs>
-              <clipPath id="clip0_34_46">
-                <rect width="20" height="20" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
-          <NavLink to="/reporting" end className="flex-1">
-            Reporting
+        <li className="relative">
+  <div
+    className="flex items-center gap-3 p-3 rounded-lg text-gray-500 hover:bg-[#00B4ED] hover:text-white transition-colors duration-200 cursor-pointer"
+    onClick={() => setIsReportingOpen(!isReportingOpen)}
+  >
+    {/* Reporting Icon */}
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <g clipPath="url(#clip0_34_46)">
+        <path d="M4.0625 12.5H2.8125C2.63991 12.5 2.5 12.6399 2.5 12.8125V18.4375C2.5 18.6101 2.63991 18.75 2.8125 18.75H4.0625C4.23509 18.75 4.375 18.6101 4.375 18.4375V12.8125C4.375 12.6399 4.23509 12.5 4.0625 12.5Z"
+          stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12.8125 8.75H11.5625C11.3899 8.75 11.25 8.88991 11.25 9.0625V18.4375C11.25 18.6101 11.3899 18.75 11.5625 18.75H12.8125C12.9851 18.75 13.125 18.6101 13.125 18.4375V9.0625C13.125 8.88991 12.9851 8.75 12.8125 8.75Z"
+          stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M17.1875 4.375H15.9375C15.7649 4.375 15.625 4.51491 15.625 4.6875V18.4375C15.625 18.6101 15.7649 18.75 15.9375 18.75H17.1875C17.3601 18.75 17.5 18.6101 17.5 18.4375V4.6875C17.5 4.51491 17.3601 4.375 17.1875 4.375Z"
+          stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8.4375 1.25H7.1875C7.01491 1.25 6.875 1.38991 6.875 1.5625V18.4375C6.875 18.6101 7.01491 18.75 7.1875 18.75H8.4375C8.61009 18.75 8.75 18.6101 8.75 18.4375V1.5625C8.75 1.38991 8.61009 1.25 8.4375 1.25Z"
+          stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+    </svg>
+
+    <span className="flex-1">Reporting</span>
+
+    <FontAwesomeIcon
+      icon={faChevronRight}
+      className={`ml-auto transition-transform duration-200 ${
+        isReportingOpen ? "rotate-90" : ""
+      }`}
+    />
+  </div>
+
+  {/* Dropdown */}
+  {isReportingOpen && (
+    <ul className="mt-1 ml-8 space-y-1 border-l-2 border-gray-200 pl-2">
+      {reportingSubItems.map((item) => (
+        <li key={item.path}>
+          <NavLink
+            to={item.path}
+            className={({ isActive }) =>
+              `block p-2 rounded-lg font-light transition-colors duration-200 ${
+                isActive
+                  ? "bg-[#00B4ED] text-white"
+                  : "text-gray-500 hover:bg-[#00B4ED] hover:text-white"
+              }`
+            }
+          >
+            {item.name}
           </NavLink>
-        </NavItem>
+        </li>
+      ))}
+    </ul>
+  )}
+</li>
 
         {/* Settings */}
         <NavItem to="/settings"> {/* adjust route as needed */}
