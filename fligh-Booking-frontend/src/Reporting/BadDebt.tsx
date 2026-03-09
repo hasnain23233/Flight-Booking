@@ -25,7 +25,7 @@ const mockData: Booking[] = Array.from({ length: 55 }, (_, i) => ({
 const Issued: React.FC = () => {
 
     const [tempAgent, setTempAgent] = useState("");
-    const [tempSort, setTempSort] = useState("");
+    const [tempSort] = useState("");
 
     const [agentFilter, setAgentFilter] = useState("");
     const [sortBy, setSortBy] = useState("");

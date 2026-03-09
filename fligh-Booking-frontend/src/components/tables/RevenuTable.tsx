@@ -1,4 +1,13 @@
+import { useDashboardStore } from "../../store/dashboardStore";
+
 export default function RevenuTable() {
+  const {
+    currentMonthRevenue,
+    currentMonthRevenueTarget,
+    previousMonthRevenue,
+    previousMonthRevenueTarget,
+  } = useDashboardStore();
+
   return (
     <div className="w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-sm overflow-hidden">
       {/* Header */}
@@ -27,12 +36,12 @@ export default function RevenuTable() {
       {/* Data rows */}
       <div className="grid grid-cols-2 divide-x divide-gray-300 text-center">
         <div className="grid grid-cols-2 py-3">
-          <div className="text-gray-700">N/A</div>
-          <div className="text-gray-700">10</div>
+          <div className="text-gray-700">{currentMonthRevenue ?? 'N/A'}</div>
+          <div className="text-gray-700">{currentMonthRevenueTarget}</div>
         </div>
         <div className="grid grid-cols-2 py-3">
-          <div className="text-gray-700">N/A</div>
-          <div className="text-gray-700">10</div>
+          <div className="text-gray-700">{previousMonthRevenue ?? 'N/A'}</div>
+          <div className="text-gray-700">{previousMonthRevenueTarget}</div>
         </div>
       </div>
     </div>

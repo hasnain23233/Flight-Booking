@@ -1,58 +1,18 @@
 import React, { useState } from "react";
-
-interface Inquiry {
-  sr: number;
-  inquiryDate: string;
-  inquiryId: string;
-  inquiryTitle: string;
-  customerEmail: string;
-  phone: string;
-  brand: string;
-}
-
-const dummyNewInquiries: Inquiry[] = [
-  {
-    sr: 1,
-    inquiryDate: "2026-01-25",
-    inquiryId: "INQ001",
-    inquiryTitle: "Flight to Dubai",
-    customerEmail: "john@example.com",
-    phone: "+1 555 123 4567",
-    brand: "SkyTravel",
-  },
-  {
-    sr: 2,
-    inquiryDate: "2026-01-26",
-    inquiryId: "INQ002",
-    inquiryTitle: "Europe Tour Inquiry",
-    customerEmail: "sarah@example.com",
-    phone: "+1 555 789 1234",
-    brand: "HolidayWorld",
-  },
-];
-
-const dummyUmrahInquiries: Inquiry[] = [
-  {
-    sr: 1,
-    inquiryDate: "2026-01-27",
-    inquiryId: "UMR001",
-    inquiryTitle: "Umrah Family Package",
-    customerEmail: "ali@example.com",
-    phone: "+966 555 444 222",
-    brand: "HolyTrips",
-  },
-];
-
-const brands = ["--Select Brand--", "SkyTravel", "HolidayWorld", "HolyTrips", "FlyAway"];
+import { useInquiryStore } from "../store/inquiryStore";
 
 const CustomerInquiries: React.FC = () => {
+  const newInquiries = useInquiryStore((state) => state.newInquiries);
+  const umrahInquiries = useInquiryStore((state) => state.umrahInquiries);
+  const brands = useInquiryStore((state) => state.brands);
+
   const [selectedBrand, setSelectedBrand] = useState("--Select Brand--");
 
   // Filter inquiries by selected brand
-  const filteredNew = dummyNewInquiries.filter(
+  const filteredNew = newInquiries.filter(
     (inq) => selectedBrand === "--Select Brand--" || inq.brand === selectedBrand
   );
-  const filteredUmrah = dummyUmrahInquiries.filter(
+  const filteredUmrah = umrahInquiries.filter(
     (inq) => selectedBrand === "--Select Brand--" || inq.brand === selectedBrand
   );
 

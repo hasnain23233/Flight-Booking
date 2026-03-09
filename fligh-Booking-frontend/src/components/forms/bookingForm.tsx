@@ -4,8 +4,59 @@ import {
     faCalendarAlt,
     faClock,
 } from '@fortawesome/free-solid-svg-icons';
+import { useBookingStore } from '../../store/bookingStore';
+
+const initialFormData = {
+        supplierName: '',
+        supplierReference: '',
+        bookingDate: '',
+        supplierAgentEmail: '',
+        bookingUnderBrand: '',
+        payingBy: '',
+        payingDueDateTime: '',
+        fullName: '',
+        phoneNumber: '',
+        mobileNumber: '',
+        customerEmail: '',
+        bookingSource: '',
+        departureAirport: '',
+        destinationAirport: '',
+        flightType: 'GDS*',
+        returnType: 'Galileo',
+        flightClass: 'Segments*',
+        economy: 0,
+        goingStopover: 'Direct',
+        returningStopover: 'Direct',
+        departureDateTime: '',
+        airline: '',
+        pnr: '',
+        pnrExpiryDateTime: '',
+        airlineLocator: '',
+        flightDetailsCustomer: '',
+        flightDetailsSystem1: '',
+        flightDetailsSystem2: '',
+        bookingNote: '',
+        quoteType: '',
+        paymentPlan: '',
+        basicFare: 0,
+        tax: 0,
+        apc: 0,
+        safi: 0,
+        misc: 0,
+        adminChargesExtra: 0,
+        passengerCategory: '',
+        passengerTitle: '',
+        firstName: '',
+        middleName: '',
+        surName: '',
+        departureDatePassenger: '',
+        salesPrice: 0,
+        adminCharges: 0,
+};
 
 const BookingForm = () => {
+    const addPendingBooking = useBookingStore((state) => state.addPendingBooking);
+    const [saved, setSaved] = useState(false);
     // State for all form fields
     const [formData, setFormData] = useState({
         // Booking Details
@@ -64,12 +115,19 @@ const BookingForm = () => {
         adminCharges: 0,
     });
 
-    const handleChange = (e: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
         setFormData((prev) => ({
             ...prev,
             [name]: type === 'number' ? parseFloat(value) || 0 : value,
         }));
+    };
+
+    const handleSave = () => {
+        addPendingBooking(formData);
+        setFormData(initialFormData);
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
     };
 
     return (
@@ -806,10 +864,23 @@ const BookingForm = () => {
 
             {/* Action Buttons */}
             <div className="flex justify-end gap-4 bg-white p-6 rounded-lg">
-                <button className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors">
+                {saved && (
+                    <span className="self-center text-green-600 font-semibold">
+                        Booking saved to pending!
+                    </span>
+                )}
+                <button
+                    type="button"
+                    onClick={() => setFormData(initialFormData)}
+                    className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                >
                     Cancel
                 </button>
-                <button className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                <button
+                    type="button"
+                    onClick={handleSave}
+                    className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                >
                     Save Booking
                 </button>
             </div>

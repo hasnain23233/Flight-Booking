@@ -4,19 +4,38 @@ import Attendence from './attendence'
 import BookingsTable from '../components/tables/BookingsTable'
 import RevenuTable from '../components/tables/RevenuTable'
 import LeavesTable from '../components/tables/LeavesTable'
+import { useDashboardStore } from '../store/dashboardStore'
 
 
-const page = () => {
+const Page = () => {
+  const {
+    agentName,
+    shiftStart,
+    shiftEnd,
+    dailyInquiries,
+    dailyBookingsRevenue,
+    monthlyInquiries,
+    monthlyBookingsRevenue,
+    revenueToday,
+    monthlyRevenue,
+    fineToday,
+    monthlyFine,
+    bookingsAchieved,
+    bookingsTarget,
+    revenueAchieved,
+    revenueTarget,
+  } = useDashboardStore()
+
   return (
     <div className='font-sans'>
       <div className='flex items-center justify-between mt-4'>
         <div>
-          <h1 className='font-semibold text-3xl text-gray-800'>Hello, Amjad</h1>
+          <h1 className='font-semibold text-3xl text-gray-800'>Hello, {agentName}</h1>
           <p className='text-gray-700 text-lg leading-loose tracking-wider'>Your personal hub for Skysnap Travel & Tours</p>
         </div>
         <div className='space-x-4 font-bold'>
-          <button className='bg-[#00B4ED] p-2 w-[100px] rounded-md text-white'>23:00:00</button>
-          <button className='bg-gray-500 p-2 w-[100px] rounded-md text-white'>23:00:00</button>
+          <button className='bg-[#00B4ED] p-2 w-[100px] rounded-md text-white'>{shiftEnd}</button>
+          <button className='bg-gray-500 p-2 w-[100px] rounded-md text-white'>{shiftEnd}</button>
           <button className='border-2 hover:bg-[#00B4ED] hover:text-white border-[#00B4ED] p-2 w-[100px] rounded-md text-[#00B4ED]'>Break</button>
           <button className='border-2 hover:bg-gray-500 hover:text-white border-gray-500 p-2 w-[100px] rounded-md text-gray-500'>Check Out</button>
         </div>
@@ -36,9 +55,9 @@ const page = () => {
               </defs>
             </svg>
           </p>
-          <h1 className='text-5xl text-[#00B4ED] mt-4 font-bold'>0</h1>
+          <h1 className='text-5xl text-[#00B4ED] mt-4 font-bold'>{dailyInquiries}</h1>
           <p className='text-gray-700 font-semibold mt-4'>DAILY INQUIRIES</p>
-          <p className='text-gray-600 text-lg'>Daily Bookings: <span className='text-[#00B4ED] text-2xl font-semibold'> 0rs</span></p>
+          <p className='text-gray-600 text-lg'>Daily Bookings: <span className='text-[#00B4ED] text-2xl font-semibold'> {dailyBookingsRevenue}rs</span></p>
         </div>
         <div className='bg-white p-4 rounded-xl border-l-4 border-[#00B4ED]'>
           <p>
@@ -48,9 +67,9 @@ const page = () => {
             </svg>
 
           </p>
-          <h1 className='text-5xl text-[#00B4ED] mt-4 font-bold'>1</h1>
+          <h1 className='text-5xl text-[#00B4ED] mt-4 font-bold'>{monthlyInquiries}</h1>
           <p className='text-gray-700 font-semibold mt-4'>MONTHLY INQUIRIES</p>
-          <p className='text-gray-600 text-lg'>Monthly Bookings:  <span className='text-[#00B4ED] text-2xl font-semibold'> 0rs</span></p>
+          <p className='text-gray-600 text-lg'>Monthly Bookings:  <span className='text-[#00B4ED] text-2xl font-semibold'> {monthlyBookingsRevenue}rs</span></p>
         </div>
         <div className='bg-white p-4 rounded-xl border-l-4 border-[#00B4ED]'>
           <p>
@@ -63,9 +82,9 @@ const page = () => {
 
 
           </p>
-          <h1 className='text-5xl text-[#00B4ED] mt-4 font-bold'>£90</h1>
+          <h1 className='text-5xl text-[#00B4ED] mt-4 font-bold'>£{revenueToday}</h1>
           <p className='text-gray-700 font-semibold mt-4'>REVENUE TODAY</p>
-          <p className='text-gray-600 text-lg'>Monthly: <span className='text-[#00B4ED] text-2xl font-semibold'> 0rs</span></p>
+          <p className='text-gray-600 text-lg'>Monthly: <span className='text-[#00B4ED] text-2xl font-semibold'> {monthlyRevenue}rs</span></p>
         </div>
         <div className='bg-white p-4 rounded-xl border-l-4 border-[#00B4ED]'>
           <p>
@@ -75,9 +94,9 @@ const page = () => {
 
 
           </p>
-          <h1 className='text-5xl text-[#00B4ED] mt-4 font-bold'>0rs</h1>
+          <h1 className='text-5xl text-[#00B4ED] mt-4 font-bold'>{fineToday}rs</h1>
           <p className='text-gray-700 font-semibold mt-4'>Total Fine Today </p>
-          <p className='text-gray-600 text-lg'>Total Monthly Fine: <span className='text-[#00B4ED] text-2xl font-semibold'> 0rs</span></p>
+          <p className='text-gray-600 text-lg'>Total Monthly Fine: <span className='text-[#00B4ED] text-2xl font-semibold'> {monthlyFine}rs</span></p>
         </div>
       </div>
 
@@ -138,7 +157,7 @@ const page = () => {
                 </svg>
 
               </p>
-              <p>14:00:00</p>
+          <p>{shiftStart}</p>
             </div>
           </div>
           <div className='w-5/12'>
@@ -158,7 +177,7 @@ const page = () => {
                 </svg>
 
               </p>
-              <p>23:00:00</p>
+              <p>{shiftEnd}</p>
             </div>
           </div>
         </div>
@@ -170,13 +189,13 @@ const page = () => {
             <h1 className='leading-loose font-semibold'>Bookings Target Achieved</h1>
             <div className='mt-3'>
 
-              <CircularGraph value={2} max={10} />
+              <CircularGraph value={bookingsAchieved} max={bookingsTarget} />
             </div>
           </div>
           <div className="flex flex-col w-6/12 p-4 justify-center items-center rounded-md bg-white">
-            <h1 className='leading-loose font-semibold'>Bookings Target Achieved</h1>
+            <h1 className='leading-loose font-semibold'>Revenue Target Achieved</h1>
             <div className='mt-3'>
-              <RevenueGraph value={500} max={1000} />
+              <RevenueGraph value={revenueAchieved} max={revenueTarget} />
             </div>
           </div>
         </div>
@@ -201,4 +220,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

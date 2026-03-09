@@ -1,28 +1,8 @@
 import React, { useMemo, useState } from "react";
-
-interface Booking {
-    id: number;
-    file: number;
-    bookingDate: string;
-    travelingDate: string;
-    returnDate: string; // ✅ fixed type
-    sopRef: string;
-    customerName: string;
-    agent: string;
-}
-
-const mockData: Booking[] = Array.from({ length: 55 }, (_, i) => ({
-    id: i + 1,
-    file: 1000 + i,
-    bookingDate: "01/01/2026",  
-    travelingDate: "05/01/2026",
-    returnDate: "10/01/2026",
-    sopRef: "SOP-" + (5000 + i),
-    customerName: "john",
-    agent: i % 2 === 0 ? "amjad" : "ali",
-}));
+import { useBookingStore } from "../store/bookingStore";
 
 const Issued: React.FC = () => {
+    const mockData = useBookingStore((state) => state.issued);
 
     const [tempAgent, setTempAgent] = useState("");
     const [tempSort, setTempSort] = useState("");
@@ -48,7 +28,7 @@ const Issued: React.FC = () => {
         }
 
         return data;
-    }, [agentFilter, sortBy]);
+    }, [mockData, agentFilter, sortBy]);
 
     // ✅ Apply Button Logic
     const handleApplyFilters = () => {
