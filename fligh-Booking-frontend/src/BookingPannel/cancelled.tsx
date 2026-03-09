@@ -1,53 +1,13 @@
 import React, { useMemo, useState } from "react";
-
-interface Booking {
-    id: number;
-    file: number;
-    bookingDate: string;
-    travelingDate: string;
-    returnDate: string; // ✅ fixed type
-    sopRef: string;
-    customerName: string;
-    agent: string;
-}
-
-const mockData: Booking[] = Array.from({ length: 55 }, (_, i) => ({
-    id: i + 1,
-    file: 1000 + i,
-    bookingDate: "01/01/2026",  
-    travelingDate: "05/01/2026",
-    returnDate: "10/01/2026",
-    sopRef: "SOP-" + (5000 + i),
-    customerName: "john",
-    agent: i % 2 === 0 ? "amjad" : "ali",
-}));
+import { useBookingStore } from "../store/bookingStore";
 
 const Issued: React.FC = () => {
-
-     
-
-    const [agentFilter, setAgentFilter] = useState("");
-    const [sortBy, setSortBy] = useState("");
+    const mockData = useBookingStore((state) => state.cancelled);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(50);
 
-    // ✅ Filtering + Sorting
-    const filteredData = useMemo(() => {
-        let data = [...mockData];
-
-        // Agent Filter
-        if (agentFilter) {
-            data = data.filter((b) => b.agent === agentFilter);
-        }
-
-        // Sorting
-        if (sortBy === "ref") {
-            data.sort((a, b) => a.id - b.id);
-        }
-
-        return data;
-    }, [agentFilter, sortBy]);
+    const filteredData = useMemo(() => [...mockData], [mockData]);
 
     
     const totalPages = Math.ceil(filteredData.length / perPage);

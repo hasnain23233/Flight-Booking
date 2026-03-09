@@ -1,26 +1,8 @@
 import React from "react";
-
-interface Booking {
-  id: number;
-  company: string;
-  code: number;
-  bookingDate: string;
-  departureDate: string;
-  customer?: string;
-  agent?: string;
-}
-
-const bookingData: Booking[] = Array.from({ length: 20 }, (_, i) => ({
-  id: i + 1,
-  company: "Sky snap tarave....",
-  code: 1634543,
-  bookingDate: "01/01/2026",
-  departureDate: "01/01/2026",
-  customer: "",
-  agent: "",
-}));
+import { useBookingStore } from "../../store/bookingStore";
 
 const BookingApprovalTable: React.FC = () => {
+  const bookingData = useBookingStore((state) => state.approvals);
   return (
     <div className="w-full mt-6">
       <div className="rounded-2xl bg-gray-100 shadow-md overflow-hidden">

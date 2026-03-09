@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaCalendarAlt, FaUserTie, FaChevronDown, FaFileExcel } from "react-icons/fa";
+import {   FaUserTie, FaChevronDown, FaFileExcel } from "react-icons/fa";
 
 type SalaryReport = {
   id: number;

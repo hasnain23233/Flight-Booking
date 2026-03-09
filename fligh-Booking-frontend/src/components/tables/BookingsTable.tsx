@@ -1,4 +1,13 @@
+import { useDashboardStore } from "../../store/dashboardStore";
+
 export default function BookingsTable() {
+  const {
+    currentMonthBookings,
+    currentMonthBookingsTarget,
+    previousMonthBookings,
+    previousMonthBookingsTarget,
+  } = useDashboardStore();
+
   return (
     <div className="w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-sm overflow-hidden">
       {/* Header */}
@@ -27,12 +36,12 @@ export default function BookingsTable() {
       {/* Data rows */}
       <div className="grid grid-cols-2 divide-x divide-gray-300 text-center">
         <div className="grid grid-cols-2 py-3">
-          <div className="text-gray-700">N/A</div>
-          <div className="text-gray-700">10</div>
+          <div className="text-gray-700">{currentMonthBookings ?? 'N/A'}</div>
+          <div className="text-gray-700">{currentMonthBookingsTarget}</div>
         </div>
         <div className="grid grid-cols-2 py-3">
-          <div className="text-gray-700">N/A</div>
-          <div className="text-gray-700">10</div>
+          <div className="text-gray-700">{previousMonthBookings ?? 'N/A'}</div>
+          <div className="text-gray-700">{previousMonthBookingsTarget}</div>
         </div>
       </div>
     </div>

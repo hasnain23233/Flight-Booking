@@ -1,42 +1,8 @@
 import React, { useMemo, useState } from "react";
+import { useBookingStore } from "../store/bookingStore";
 
-interface Booking {
-    id: number;
-    file: number;
-    bookingDate: string;
-    travelingDate: string;
-    refNo: number;
-    paymentDate: string;
-    source: number;
-    customerName: string;
-    card: number;
-    bank: number;
-    cash: number;
-    cheque: number;
-    dateAmount: number;
-    agent: string;
-    brand: string;
-}
-
-const mockData: Booking[] = Array.from({ length: 55 }, (_, i) => ({
-    id: i + 1,
-    file: 0,
-    bookingDate: "01/01/2026",
-    travelingDate: "01/01/2026",
-    refNo: 12432343 + i,
-    paymentDate: "01/01/2026",
-    source: 45332,
-    customerName: "john",
-    card: 0,
-    bank: 0,
-    cash: 0,
-    cheque: 0,
-    dateAmount: 0,
-    agent: i % 2 === 0 ? "amjad" : "ali",
-    brand: i % 2 === 0 ? "Sky" : "TravelCo",
-}));
-
-const paddingBooking: React.FC = () => {
+const PaddingBooking: React.FC = () => {
+    const mockData = useBookingStore((state) => state.pending);
     const [searchInput, setSearchInput] = useState("");
     const [search, setSearch] = useState("");
 
@@ -73,7 +39,7 @@ const paddingBooking: React.FC = () => {
         }
 
         return data;
-    }, [search, brandFilter, agentFilter, sortBy]);
+    }, [mockData, search, brandFilter, agentFilter, sortBy]);
 
     const handleSearch = () => {
         setSearch(searchInput);
@@ -261,4 +227,4 @@ const paddingBooking: React.FC = () => {
     );
 };
 
-export default paddingBooking;
+export default PaddingBooking;
