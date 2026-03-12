@@ -72,7 +72,7 @@ const SaleConversion = () => {
       {/* Table */}
       <div className="bg-white rounded-xl shadow overflow-hidden">
         <table className="w-full text-sm">
-          <thead className="bg-sky-500 h-16 text-white">
+          <thead className="bg-sky-500 h-16   text-white">
             <tr>
               <th className="py-3 px-4 text-left">Sr#</th>
               <th className="py-3 px-4 text-left">Agent Name</th>
