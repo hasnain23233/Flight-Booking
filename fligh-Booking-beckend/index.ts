@@ -2,9 +2,14 @@ import express , {Request , Response} from "express";
 import mongoos from 'mongoose'
 import BookingRouter from './routers/bookingRouters'
 
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env.local" });
+
 const app = express()
-const mongo_link = 'mongodb://localhost:27017/'
-const PORT = 500
+
+const PORT = process.env.PORT || 5000;
+const mongo_link = process.env.MONGO_URI as string;
 
 
 app.use('/' , (req : Request , res: Response )=>{
