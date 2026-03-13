@@ -85,7 +85,7 @@ interface BookingStore {
   cancelled: IssuedBooking[];
 
   // Actions
-  addPendingBooking: (payload: BookingFormPayload) => void;
+  addPendingBooking: (payload: BookingFormPayload) => Promise<void>;
   approveBooking: (id: number) => void;
   rejectBooking: (id: number) => void;
   cancelBooking: (id: number) => void;
@@ -101,27 +101,35 @@ export const useBookingStore = create<BookingStore>((set) => ({
   cleared: initialCleared,
   cancelled: initialCancelled,
 
-  addPendingBooking: (payload) =>
-    set((state) => {
-      const newBooking: PendingBooking = {
-        id: pendingIdCounter++,
-        file: 0,
-        bookingDate: payload.bookingDate || new Date().toLocaleDateString('en-GB'),
-        travelingDate: payload.departureDateTime || '',
-        refNo: Math.floor(Math.random() * 90000000) + 10000000,
-        paymentDate: payload.payingDueDateTime || '',
-        source: 0,
-        customerName: payload.fullName,
-        card: 0,
-        bank: 0,
-        cash: 0,
-        cheque: 0,
-        dateAmount: payload.salesPrice,
-        agent: '',
-        brand: payload.bookingUnderBrand,
-      };
-      return { pending: [...state.pending, newBooking] };
-    }),
+  addPendingBooking: async (payload) => {
+
+    try {
+
+      console.log("Sending booking data:", payload);
+
+      const res = await fetch("http://localhost:5000/api/booking/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      console.log("API Response status:", res.status);
+
+      const data = await res.json();
+
+      console.log("API Response data:", data);
+
+      if (data.success) {
+        console.log("Booking saved in database!");
+      }
+
+    } catch (error) {
+      console.error("Booking API error:", error);
+    }
+
+  },
 
   approveBooking: (id) =>
     set((state) => ({
