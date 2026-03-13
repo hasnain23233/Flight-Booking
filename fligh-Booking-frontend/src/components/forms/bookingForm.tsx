@@ -7,59 +7,57 @@ import {
 import { useBookingStore } from '../../store/bookingStore';
 
 const initialFormData = {
-        supplierName: '',
-        supplierReference: '',
-        bookingDate: '',
-        supplierAgentEmail: '',
-        bookingUnderBrand: '',
-        payingBy: '',
-        payingDueDateTime: '',
-        fullName: '',
-        phoneNumber: '',
-        mobileNumber: '',
-        customerEmail: '',
-        bookingSource: '',
-        departureAirport: '',
-        destinationAirport: '',
-        flightType: 'GDS*',
-        returnType: 'Galileo',
-        flightClass: 'Segments*',
-        economy: 0,
-        goingStopover: 'Direct',
-        returningStopover: 'Direct',
-        departureDateTime: '',
-        airline: '',
-        pnr: '',
-        pnrExpiryDateTime: '',
-        airlineLocator: '',
-        flightDetailsCustomer: '',
-        flightDetailsSystem1: '',
-        flightDetailsSystem2: '',
-        bookingNote: '',
-        quoteType: '',
-        paymentPlan: '',
-        basicFare: 0,
-        tax: 0,
-        apc: 0,
-        safi: 0,
-        misc: 0,
-        adminChargesExtra: 0,
-        passengerCategory: '',
-        passengerTitle: '',
-        firstName: '',
-        middleName: '',
-        surName: '',
-        departureDatePassenger: '',
-        salesPrice: 0,
-        adminCharges: 0,
+    supplierName: '',
+    supplierReference: '',
+    bookingDate: '',
+    supplierAgentEmail: '',
+    bookingUnderBrand: '',
+    payingBy: '',
+    payingDueDateTime: '',
+    fullName: '',
+    phoneNumber: '',
+    mobileNumber: '',
+    customerEmail: '',
+    bookingSource: '',
+    departureAirport: '',
+    destinationAirport: '',
+    flightType: 'GDS*',
+    returnType: 'Galileo',
+    flightClass: 'Segments*',
+    economy: 0,
+    goingStopover: 'Direct',
+    returningStopover: 'Direct',
+    departureDateTime: '',
+    airline: '',
+    pnr: '',
+    pnrExpiryDateTime: '',
+    airlineLocator: '',
+    flightDetailsCustomer: '',
+    flightDetailsSystem1: '',
+    flightDetailsSystem2: '',
+    bookingNote: '',
+    quoteType: '',
+    paymentPlan: '',
+    basicFare: 0,
+    tax: 0,
+    apc: 0,
+    safi: 0,
+    misc: 0,
+    adminChargesExtra: 0,
+    passengerCategory: '',
+    passengerTitle: '',
+    firstName: '',
+    middleName: '',
+    surName: '',
+    departureDatePassenger: '',
+    salesPrice: 0,
+    adminCharges: 0,
 };
 
 const BookingForm = () => {
     const addPendingBooking = useBookingStore((state) => state.addPendingBooking);
     const [saved, setSaved] = useState(false);
-    // State for all form fields
     const [formData, setFormData] = useState({
-        // Booking Details
         supplierName: '',
         supplierReference: '',
         bookingDate: '',
@@ -123,16 +121,20 @@ const BookingForm = () => {
         }));
     };
 
-    const handleSave = () => {
-        addPendingBooking(formData);
+    const handleSave = async () => {
+
+        await addPendingBooking(formData);
+
         setFormData(initialFormData);
+
         setSaved(true);
+
         setTimeout(() => setSaved(false), 3000);
+
     };
 
     return (
         <div className="mt-4 font-sans w-full">
-            {/* Booking Details (existing) */}
             <section className="mb-8 bg-white p-5 rounded-lg">
                 <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-700">
                     <p>{/* SVG icon for Booking Details */}</p>
