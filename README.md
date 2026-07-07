@@ -74,3 +74,8 @@ A modern, full-stack Flight Booking Customer Relationship Management system that
 ---
 
 <p align="center">⭐ If you like my work, feel free to explore my repositories and drop a star!</p>
+
+<img width="1917" height="914" alt="image" src="https://github.com/user-attachments/assets/d120cda3-3f56-41ec-9d69-06e289aceb8d" />
+<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/f705dd07-77eb-4acc-91e7-96b598af9483" />
+
+
